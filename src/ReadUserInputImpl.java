@@ -1,24 +1,22 @@
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 /**
  * Created by lstday
  * 22.10.15.
  */
 
-public class ReadUserInputImplemented implements Operations, AutoCloseable {
-    Scanner scanner = new Scanner(System.in);
+public class ReadUserInputImpl implements ReadUserInput, AutoCloseable {
 
     @Override
     public Double getDoubleValue() {
         Double scanned = null;
+
+
         do {
-            try {
+            if (scanner.hasNextDouble()) {
                 scanned = scanner.nextDouble();
-            } catch (InputMismatchException e) {
+            } else {
                 if (scanner.hasNext("q"))
                     break;
-                System.out.println("Tou must enter value. Press \"q\" for exit");
+                System.out.println("You must enter value. Press \"q\" for exit");
                 scanner.next();
             }
         } while (scanned == null);
@@ -39,7 +37,7 @@ public class ReadUserInputImplemented implements Operations, AutoCloseable {
         return scanned;
     }
 
-     @Override
+    @Override
     public char getAnswer() {
         Character answer = null;
         String tempStringAnswer = "";

@@ -4,30 +4,104 @@
  */
 
 public class Calculator {
-    ReadOperations someOperations = new ReadOperations();
+    private Double firstArg = null;
+    private Double secondArg = null;
+    private Double result = null;
+    private Double tempResult = null;
 
     public void init() {
         System.out.println("Hello stranger. You are in SimpleCalc.");
-        while (true) {
-            System.out.println("Do you want calculate? (Press \"y\" for init, \"q\" (or other key) for quit");
-
-//            if (someOperations.scanner.next().equalsIgnoreCase("y")) { //поарвил
-            if (("y").equals(someOperations.scanner.next().toLowerCase())) {
-                System.out.println("Okay! As you can now, this Calculator work that way: you must enter first value, than you must enter second value. After that you must enter arithmetic operation. If all thing done right - you'll get result!");
-                System.out.println("First you must enter first value: (q for exit)");
-                Double first = someOperations.scanDouble();
-                System.out.println("Than you must enter second value: (q for exit)");
-                Double second = someOperations.scanDouble();
+        try (ReadUserInputImpl userInput = new ReadUserInputImpl()) {
+            System.out.println("Do you want calculate? (Press \"y\" for init, \"q\" or \"n\" for quit");
+            char exit = userInput.getAnswer();
+            while (exit != 'n' && exit != 'q') {
+                System.out.println("Okay! As you can now, this Calculator work that way: you must enter firstArg value, than you must enter secondArg value. After that you must enter arithmetic operation. If all thing done right - you'll get result!");
+                checkOldResult(userInput);
+                if (firstArg == null) {
+                    System.out.println("Ready? First you must enter firstArg value: (q for exit)");
+                    firstArg = userInput.getDoubleValue();
+                }
+                if (secondArg == null) {
+                    System.out.println("Than you must enter secondArg value: (q for exit)");
+                    secondArg = userInput.getDoubleValue();
+                }
                 System.out.println("Ok. Now you must enter math operation");
-                char operator = someOperations.scanOperator();
+                char operator = userInput.getCharOperator();
                 System.out.print("Now your result is ");
-                Double result = someOperations.getResult(first, second, operator);
+                result = countResult(firstArg, secondArg, operator);
                 System.out.println(result);
+                tempResult = result;
+                System.out.println("one more time?");
+                exit = userInput.getAnswer();
+            }
+            System.out.println("Good day!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-            } else {
-                System.out.println("Good day!");
-                System.exit(1);
+    private Double countResult(Double firstArg, Double secondArg, char operator) {
+        Double result = 0.0;
+        switch (operator) {
+            case '+':
+                result = firstArg + secondArg;
+                break;
+            case '-':
+                result = firstArg - secondArg;
+                break;
+            case '/':
+                result = firstArg / secondArg;
+                break;
+            case '*':
+                result = firstArg * secondArg;
+                break;
+            case '^':
+                double tempResult = firstArg;
+                for (int i = 1; i < secondArg; i++) {
+                    tempResult *= firstArg;
+                }
+                result = tempResult;
+                break;
+            default:
+                System.out.println("Plug. You cannot see it.");
+        }
+        return result;
+    }
+
+    private void checkOldResult(ReadUserInputImpl userInput) {
+        if ((result != null) || (firstArg != null) || (secondArg != null)) {
+            System.out.println("Do you wanna use result of previous round?");
+            char useOldResult = userInput.getAnswer();
+            if (useOldResult == 'n') {
+                flushPreviousResults();
+                System.out.println("Okay. Result was flushed.");
+            } else if (useOldResult == 'y') {
+                System.out.println("Okay, if you wanna use older result, we need to understand something. Will it be the firstArg value?");
+                useOldResult = userInput.getAnswer();
+                if (useOldResult == 'y') {
+                    flushPreviousResults();
+                    System.out.println("Okay, we will use old result as firstArg value!");
+                    firstArg = tempResult;
+                } else if (useOldResult == 'n') {
+                    System.out.println("Will it be the secondArg value?");
+                    useOldResult = userInput.getAnswer();
+                    if (useOldResult == 'y') {
+                        flushPreviousResults();
+                        System.out.println("Okay, we will use old result as secondArg value!");
+                        secondArg = tempResult;
+                    } else if (useOldResult == 'n') {
+                        System.out.println("Okay, we will not use old result");
+                        flushPreviousResults();
+                    }
+                }
             }
         }
     }
+
+    private void flushPreviousResults() {
+        this.firstArg = null;
+        this.secondArg = null;
+        this.result = null;
+    }
+
 }

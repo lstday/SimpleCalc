@@ -15,30 +15,32 @@ public class Calculator {
             System.out.println("Do you want calculate? (Press \"y\" for init, \"q\" or \"n\" for quit");
             char exit = userInput.getAnswer();
             while (exit != 'n' && exit != 'q') {
-                System.out.println("Okay! As you can now, this Calculator work that way: you must enter firstArg value, than you must enter secondArg value. After that you must enter arithmetic operation. If all thing done right - you'll get result!");
-                checkOldResult(userInput);
+
+                showRules();
+                oldResultManipulations(userInput);
                 if (firstArg == null) {
-                    System.out.println("Ready? First you must enter firstArg value: (q for exit)");
+                    System.out.println("Ready? First you must enter first value: (q for exit)");
                     firstArg = userInput.getDoubleValue();
                 }
                 if (secondArg == null) {
-                    System.out.println("Than you must enter secondArg value: (q for exit)");
+                    System.out.println("Than you must enter second value: (q for exit)");
                     secondArg = userInput.getDoubleValue();
                 }
                 System.out.println("Ok. Now you must enter math operation");
                 char operator = userInput.getCharOperator();
-                System.out.print("Now your result is ");
                 result = countResult(firstArg, secondArg, operator);
-                System.out.println(result);
+                System.out.printf("Now your result is %.1f\n", result);
                 tempResult = result;
-                System.out.println("one more time?");
+
+                System.out.println("One more time?");
                 exit = userInput.getAnswer();
             }
             System.out.println("Good day!");
-        } catch (Exception e) {
+        } catch (Exception e) { //TODO fix this exception type.
             e.printStackTrace();
         }
     }
+
 
     private Double countResult(Double firstArg, Double secondArg, char operator) {
         Double result = 0.0;
@@ -68,7 +70,10 @@ public class Calculator {
         return result;
     }
 
-    private void checkOldResult(ReadUserInputImpl userInput) {
+    /**
+     * Here will ask to use old result as a first or second value.
+     **/
+    private void oldResultManipulations(ReadUserInputImpl userInput) {
         if ((result != null) || (firstArg != null) || (secondArg != null)) {
             System.out.println("Do you wanna use result of previous round?");
             char useOldResult = userInput.getAnswer();
@@ -80,10 +85,10 @@ public class Calculator {
                 useOldResult = userInput.getAnswer();
                 if (useOldResult == 'y') {
                     flushPreviousResults();
-                    System.out.println("Okay, we will use old result as firstArg value!");
+                    System.out.println("Okay, we will use old result as first value!");
                     firstArg = tempResult;
                 } else if (useOldResult == 'n') {
-                    System.out.println("Will it be the secondArg value?");
+                    System.out.println("Will it be the second value?");
                     useOldResult = userInput.getAnswer();
                     if (useOldResult == 'y') {
                         flushPreviousResults();
@@ -99,9 +104,12 @@ public class Calculator {
     }
 
     private void flushPreviousResults() {
-        this.firstArg = null;
-        this.secondArg = null;
-        this.result = null;
+        firstArg = null;
+        secondArg = null;
+        result = null;
     }
 
+    private void showRules() {
+        System.out.println("Okay! As you can now, this Calculator work that way: you must enter firstArg value, than you must enter secondArg value. After that you must enter arithmetic operation. If all thing done right - you'll get result!");
+    }
 }

@@ -9,18 +9,16 @@ public class ReadUserInputImpl implements ReadUserInput, AutoCloseable {
     public Double getDoubleValue() {
         Double scanned = null;
 
-
         do {
             if (scanner.hasNextDouble()) {
                 scanned = scanner.nextDouble();
             } else {
                 if (scanner.hasNext("q"))
-                    break;
+                    System.exit(0); //TODO fix exit mechanism. Seems need fix method entirely.
                 System.out.println("You must enter value. Press \"q\" for exit");
                 scanner.next();
             }
         } while (scanned == null);
-//        System.out.println("You entered " + scanned);
         return scanned;
     }
 
@@ -33,7 +31,6 @@ public class ReadUserInputImpl implements ReadUserInput, AutoCloseable {
             String tBuffer = scanner.next();
             scanned = tBuffer.charAt(0);
         } while ((scanned != '+') && (scanned != '-') && (scanned != '/') && (scanned != '*') && (scanned != '^'));
-//        System.out.println("You entered " + scanned);
         return scanned;
     }
 

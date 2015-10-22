@@ -13,5 +13,4 @@ public interface ReadUserInput {
     Double getDoubleValue();
 
     Scanner scanner = new Scanner(System.in);
-
 }

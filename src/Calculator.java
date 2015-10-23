@@ -1,3 +1,6 @@
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * Created by lstday
  * 22.10.15.
@@ -9,6 +12,15 @@ public class Calculator {
     private Double result = null;
     private Double tempResult = null;
 
+    private final Map<Character, Operation> operations = new LinkedHashMap<>();
+
+    public void load(Operation operation) {
+        operations.put(operation.key(), operation);
+    }
+
+    /**
+     * Main method with the game logic.
+     */
     public void init() {
         System.out.println("Hello stranger. You are in SimpleCalc.");
         try (ReadUserInputImpl userInput = new ReadUserInputImpl()) {
@@ -41,39 +53,16 @@ public class Calculator {
         }
     }
 
-
     private Double countResult(Double firstArg, Double secondArg, char operator) {
-        Double result = 0.0;
-        switch (operator) {
-            case '+':
-                result = firstArg + secondArg;
-                break;
-            case '-':
-                result = firstArg - secondArg;
-                break;
-            case '/':
-                result = firstArg / secondArg;
-                break;
-            case '*':
-                result = firstArg * secondArg;
-                break;
-            case '^':
-                double tempResult = firstArg;
-                for (int i = 1; i < secondArg; i++) {
-                    tempResult *= firstArg;
-                }
-                result = tempResult;
-                break;
-            default:
-                System.out.println("Plug. You cannot see it.");
-        }
-        return result;
+        Operation operation = operations.get(operator);
+        return operation.calculate(firstArg, secondArg);
     }
 
     /**
-     * Here will ask to use old result as a first or second value.
+     * ASks user to use old result as a first or second value.
+     * This method I will soon alter.
      **/
-    private void oldResultManipulations(ReadUserInputImpl userInput) {
+    private void oldResultManipulations(ReadUserInputImpl userInput) { //TODO alter method body
         if ((result != null) || (firstArg != null) || (secondArg != null)) {
             System.out.println("Do you wanna use result of previous round?");
             char useOldResult = userInput.getAnswer();
@@ -103,12 +92,18 @@ public class Calculator {
         }
     }
 
+    /**
+     * Nulls all arguments after user decides to use(or not to use) previous result
+     */
     private void flushPreviousResults() {
         firstArg = null;
         secondArg = null;
         result = null;
     }
 
+    /**
+     * This is rules. Big string which i decide to move in method.
+     */
     private void showRules() {
         System.out.println("Okay! As you can now, this Calculator work that way: you must enter firstArg value, than you must enter secondArg value. After that you must enter arithmetic operation. If all thing done right - you'll get result!");
     }

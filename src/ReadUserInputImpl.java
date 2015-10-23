@@ -1,20 +1,26 @@
+import java.util.Scanner;
+
 /**
  * Created by lstday
  * 22.10.15.
  */
 
+/**
+ * This class implemented and operates with user input
+ */
 public class ReadUserInputImpl implements ReadUserInput, AutoCloseable {
+    Scanner scanner = new Scanner(System.in);
 
     @Override
     public Double getDoubleValue() {
         Double scanned = null;
-
         do {
             if (scanner.hasNextDouble()) {
                 scanned = scanner.nextDouble();
             } else {
                 if (scanner.hasNext("q"))
-                    System.exit(0); //TODO fix exit mechanism. Seems need fix method entirely.
+                    System.out.println("Entered q - emergency exit");
+                    System.exit(0);
                 System.out.println("You must enter value. Press \"q\" for exit");
                 scanner.next();
             }
@@ -25,7 +31,6 @@ public class ReadUserInputImpl implements ReadUserInput, AutoCloseable {
     @Override
     public char getCharOperator() {
         char scanned = ' ';
-        char[] chars;
         do {
             System.out.println("You must enter + or - or / or * or ^");
             String tBuffer = scanner.next();
@@ -36,7 +41,6 @@ public class ReadUserInputImpl implements ReadUserInput, AutoCloseable {
 
     @Override
     public char getAnswer() {
-        Character answer = null;
         String tempStringAnswer = "";
         do {
             tempStringAnswer = scanner.next();

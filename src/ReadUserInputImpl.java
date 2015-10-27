@@ -18,9 +18,10 @@ public class ReadUserInputImpl implements ReadUserInput, AutoCloseable {
             if (scanner.hasNextDouble()) {
                 scanned = scanner.nextDouble();
             } else {
-                if (scanner.hasNext("q"))
+                if (scanner.hasNext("q")) {
                     System.out.println("Entered q - emergency exit");
                     System.exit(0);
+                }
                 System.out.println("You must enter value. Press \"q\" for exit");
                 scanner.next();
             }
@@ -44,12 +45,12 @@ public class ReadUserInputImpl implements ReadUserInput, AutoCloseable {
         String tempStringAnswer = "";
         do {
             tempStringAnswer = scanner.next();
-            if ((!tempStringAnswer.equalsIgnoreCase("y") && !tempStringAnswer.equalsIgnoreCase("n") && !tempStringAnswer.equalsIgnoreCase("q")))
+            if ((!"y".equalsIgnoreCase(tempStringAnswer) && !"n".equalsIgnoreCase(tempStringAnswer) && !"q".equalsIgnoreCase(tempStringAnswer)))
                 System.out.println("You must enter y or n or q! Do it!");
         }
-        while (!tempStringAnswer.equalsIgnoreCase("y") && !tempStringAnswer.equalsIgnoreCase("n") && !tempStringAnswer.equalsIgnoreCase("q"));
-        if (tempStringAnswer.equalsIgnoreCase("y")) return 'y';
-        else if (tempStringAnswer.equalsIgnoreCase("n")) return 'n';
+        while (!"y".equalsIgnoreCase(tempStringAnswer) && !"n".equalsIgnoreCase(tempStringAnswer) && !"q".equalsIgnoreCase(tempStringAnswer));
+        if ("y".equalsIgnoreCase(tempStringAnswer)) return 'y';
+        else if ("n".equalsIgnoreCase(tempStringAnswer)) return 'n';
         else return 'q';
     }
 

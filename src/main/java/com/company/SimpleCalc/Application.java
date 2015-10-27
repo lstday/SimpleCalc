@@ -1,3 +1,5 @@
+package com.company.SimpleCalc;
+
 /**
  * Created by lstday
  * 22.10.15.

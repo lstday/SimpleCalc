@@ -1,3 +1,5 @@
+package com.company.SimpleCalc;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -105,6 +107,6 @@ public class Calculator {
      * This is rules. Big string which i decide to move in method.
      */
     private void showRules() {
-        System.out.println("Okay! As you can now, this Calculator work that way: you must enter firstArg value, than you must enter secondArg value. After that you must enter arithmetic operation. If all thing done right - you'll get result!");
+        System.out.println("Okay! As you can now, this com.company.SimpleCalc.Calculator work that way: you must enter firstArg value, than you must enter secondArg value. After that you must enter arithmetic operation. If all thing done right - you'll get result!");
     }
 }

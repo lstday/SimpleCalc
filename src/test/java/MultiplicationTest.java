@@ -1,3 +1,4 @@
+import com.company.SimpleCalc.Multiplication;
 import junit.framework.Assert;
 import org.junit.Test;
 

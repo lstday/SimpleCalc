@@ -1,3 +1,5 @@
+package com.company.SimpleCalc;
+
 /**
  * Created by lstday
  * 23.10.15.
@@ -15,7 +17,7 @@ public interface Operation {
 
     /**
      * Define key operation
-     * @return key for map of Operation-values
+     * @return key for map of com.company.SimpleCalc.Operation-values
      */
     char key();
 }

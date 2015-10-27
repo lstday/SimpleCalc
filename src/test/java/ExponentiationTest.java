@@ -1,3 +1,4 @@
+import com.company.SimpleCalc.Exponentiation;
 import junit.framework.Assert;
 import org.junit.Test;
 

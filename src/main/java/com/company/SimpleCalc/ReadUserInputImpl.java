@@ -1,3 +1,5 @@
+package com.company.SimpleCalc;
+
 import java.util.Scanner;
 
 /**

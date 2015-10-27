@@ -12,6 +12,6 @@ public class SummationTest {
     @Test
     public void testCalculate() throws Exception {
         Summation summation = new Summation();
-        Assert.assertEquals(summation.calculate(4, 3), 7);
+        Assert.assertEquals(summation.calculate(4, 3), (double) 7);
     }
 }

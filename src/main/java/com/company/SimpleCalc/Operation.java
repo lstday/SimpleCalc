@@ -9,11 +9,11 @@ public interface Operation {
     /**
      * Calculates arithm. operations on 2 args
      *
-     * @param firstAtg  - first argument
-     * @param secondAtg - second argument
+     * @param firstArg  - first argument
+     * @param secondArg - second argument
      * @return - result of operation
      */
-    double calculate(double firstAtg, double secondAtg);
+    double calculate(double firstArg, double secondArg) throws SimpleCalcException;
 
     /**
      * Define key operation

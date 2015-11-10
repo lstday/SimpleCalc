@@ -5,11 +5,11 @@ package com.company.SimpleCalc;
  * 23.10.15.
  */
 
-public class Subtract implements Operation{
+public class Subtract implements Operation {
 
     @Override
-    public double calculate(double firstAtg, double secondAtg) {
-        return firstAtg - secondAtg;
+    public double calculate(double firstArg, double secondArg) {
+        return firstArg - secondArg;
     }
 
     @Override

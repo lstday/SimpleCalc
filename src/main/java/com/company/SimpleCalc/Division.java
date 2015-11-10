@@ -8,8 +8,10 @@ package com.company.SimpleCalc;
 public class Division implements Operation {
 
     @Override
-    public double calculate(double firstAtg, double secondAtg) {
-        return firstAtg / secondAtg;
+    public double calculate(double firstArg, double secondArg) throws SimpleCalcException {
+        if (secondArg != 0)
+            return firstArg / secondArg;
+        else throw new SimpleCalcException("Division by zero is unacceptable!");
     }
 
     @Override

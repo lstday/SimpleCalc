@@ -8,8 +8,8 @@ package com.company.SimpleCalc;
 public class Summation implements Operation {
 
     @Override
-    public double calculate(double firstAtg, double secondAtg) {
-        return firstAtg + secondAtg;
+    public double calculate(double firstArg, double secondArg) {
+        return firstArg + secondArg;
     }
 
     @Override

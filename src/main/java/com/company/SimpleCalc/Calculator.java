@@ -43,7 +43,9 @@ public class Calculator {
                 System.out.println("Ok. Now you must enter math operation");
                 char operator = userInput.getCharOperator();
                 result = countResult(firstArg, secondArg, operator);
-                System.out.printf("Now your result is %.1f\n", result);
+                if (result != null) {
+                    System.out.printf("Now your result is %.1f\n", result);
+                }
                 tempResult = result;
 
                 System.out.println("One more time?");
@@ -57,7 +59,14 @@ public class Calculator {
 
     private Double countResult(Double firstArg, Double secondArg, char operator) {
         Operation operation = operations.get(operator);
-        return operation.calculate(firstArg, secondArg);
+        try {
+            return operation.calculate(firstArg, secondArg);
+        } catch (SimpleCalcException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Please next time enter correct values.");
+
+        }
+        return null;
     }
 
     /**
@@ -107,6 +116,6 @@ public class Calculator {
      * This is rules. Big string which i decide to move in method.
      */
     private void showRules() {
-        System.out.println("Okay! As you can now, this com.company.SimpleCalc.Calculator work that way: you must enter firstArg value, than you must enter secondArg value. After that you must enter arithmetic operation. If all thing done right - you'll get result!");
+        System.out.printf("Okay! As you can now, this %s work that way: you must enter firstArg value, than you must enter secondArg value. After that you must enter arithmetic operation. If all thing done right - you'll get result!\n", Calculator.class.getSimpleName());
     }
 }

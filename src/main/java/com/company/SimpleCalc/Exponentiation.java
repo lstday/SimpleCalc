@@ -8,8 +8,8 @@ package com.company.SimpleCalc;
 public class Exponentiation implements Operation {
 
     @Override
-    public double calculate(double firstAtg, double secondAtg) {
-        return Math.pow(firstAtg, secondAtg);
+    public double calculate(double firstArg, double secondArg) {
+        return Math.pow(firstArg, secondArg);
     }
 
     @Override

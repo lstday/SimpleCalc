@@ -26,7 +26,7 @@ public class Calculator {
     public void init() {
         System.out.println("Hello stranger. You are in SimpleCalc.");
         try (ReadUserInputImpl userInput = new ReadUserInputImpl()) {
-            System.out.println("Do you want calculate? (Press \"y\" for init, \"q\" or \"n\" for quit");
+            System.out.println("Do you want calculate? (Press \"y\" for init, \"q\" or \"n\" for quit)");
             char exit = userInput.getAnswer();
             while (exit != 'n' && exit != 'q') {
 
